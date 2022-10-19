@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Codificação</title>
+        <meta charset="UTF-8">
+        <script src="index.js"></script>
+        <link href="index.css" rel="stylesheet">
+    </head>
+    <body>
+        <center><h2>Cifra de cesar </h2>
+        <button onclick="prev()">-</button>
+        <span id="key">1</span>
+        <button onclick="next()">+</button><br/><br/>
+        <input type="text" id="input"/>
+        <button onclick="calculate()" id="big">Codificar</button>
+        <span id="output"></span>
+        <script>
+            var values = new Array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+            var key = +document.getElementById("key").innerHTML;
+
+            function prev() {
+                if(key > 1) {
+                    key--;
+                    document.getElementById("key").innerHTML = key;
+                }
+            }
+
+            function next() {
+                if(key < 25) {
+                    key++;
+                    document.getElementById("key").innerHTML = key;
+                }
+            }
+
+            function calculate() {
+                var input = document.getElementById("input").value.toUpperCase();
+                var result = "";
+
+                for(var i = 0; i<input.length; i++){
+
+                    var posicaoDaLetraNoAlfabeto = input.charCodeAt(i)-64;
+                    var letraComDeslocamento = (posicaoDaLetraNoAlfabeto + key) % 26;
+                    letraComDeslocamento = letraComDeslocamento == 0 ? 26 : letraComDeslocamento;
+                    result += values[letraComDeslocamento-1];
+                }
+
+                document.getElementById("output").innerHTML = result;
+            }
+        </script>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2>Base 64</h2>
+        <input type="button" value="codificar" id="codificar" onclick="codifica()">
+        <input type="button" value="decodificar" id="decodificar" onclick="decodifica()">
+        <br>
+        <br>
+        <textarea id="resultado" placeholder="Texto"></textarea></center>
+
+    </body>
+</html>
